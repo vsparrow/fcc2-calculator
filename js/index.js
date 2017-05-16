@@ -1,11 +1,21 @@
 //Step one : test each individual function // document
 //************************************************************************************
 //NOTES
+// ===VARIABLES===
+// currentValueString 					used to display current number user is inputting
+// periodAllowed						used to prevent multiple periods in an operand
 
-
+// ===FUNCTIONS===
+// updateCurrentValueString				concats numbers rather than add, ie: 5+5=55
+//										updates var currentValueString, which is used to display current number
+// periodHandler						will forward period to updateCurrentValueString if one hasn't been used
+//											in the current operand.
 //************************************************************************************
 //************************************************************************************
 //Functions tested are in this block
+//variables
+var currentValueString = "0";
+var periodAllowed = true;
 
 // operation functions
 function multiply(operand1,operand2)	{return operand1 * operand2};
@@ -13,19 +23,22 @@ function divide(operand1,operand2)		{return operand1 / operand2};
 function minus(operand1,operand2)		{return operand1 - operand2};
 function plus(operand1,operand2)		{return operand1 + operand2};
 
-
-//************************************************************************************
-//************************************************************************************
-//new functions/tests are in this block
-var currentValueString = "0";
 function updateCurrentValueString(numberString){
 	if(currentValueString === "0") {currentValueString = "" + numberString}
 	else {currentValueString = "" + currentValueString + numberString;}
 	console.log(currentValueString);
 };
 
-//Todo: update number buttons to call  currentValueString rather than update()
-function update(number){updateCurrentValueString(number)}
+function periodHandler(){
+	if(periodAllowed === true){updateCurrentValueString("."); periodAllowed=false;}
+};
+//************************************************************************************
+//************************************************************************************
+
+// function clearEntry(){
+
+// }
+
 
 //************************************************************************************
 //************************************************************************************
