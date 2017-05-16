@@ -28,23 +28,23 @@ User Story: I can keep chaining mathematical operations together until I hit the
 <h4 id="currentChain">Number chain goes here</h4>
 <button id="allClear" onclick="update('AC')">AC</button>
 <button id="clearCurrent" onclick='clearEntry("CE")'>CE</button>
-<button id="divide"  onclick='update("/")'>%</button>
+<button id="divide"  onclick='operand("/")'>%</button>
 
 <br>
 <button id="seven" onclick='updateCurrentValueString(7)' >7</button>
 <button id="eight" onclick='updateCurrentValueString(8)'>8</button>
 <button id="nine" onclick='updateCurrentValueString(9)'>9</button>
-<button id="multiply" onclick='update("X")'>x</button>
+<button id="multiply" onclick='operand("X")'>x</button>
 <br>
 <button id="four" onclick='updateCurrentValueString(4)'>4</button>
 <button id="five" onclick='updateCurrentValueString(5)'>5</button>
 <button id="six" onclick='updateCurrentValueString(6)'>6</button>
-<button id="minus" onclick='update("-")'>-</button>
+<button id="minus" onclick='operand("-")'>-</button>
 <br> 
 <button id="one" onclick='updateCurrentValueString(1)'>1</button>
 <button id="two" onclick='updateCurrentValueString(2)'>2</button>
 <button id="three" onclick='updateCurrentValueString(3)'>3</button>
-<button id="plus" onclick='update("+")'>+</button>
+<button id="plus" onclick='operand("+")'>+</button>
 <br>
 <button id="zero" onclick='updateCurrentValueString(0)'>0</button>
 <button id="dot" onclick='periodHandler()'>.</button>

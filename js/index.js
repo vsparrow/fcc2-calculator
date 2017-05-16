@@ -4,6 +4,8 @@
 // ===VARIABLES===
 // currentValueString 					used to display current number user is inputting
 // periodAllowed						used to prevent multiple periods in an operand
+// valueChain							array that holds values until evaluated
+// operandAllowed						used to prevent multiple operators being called in succession 
 
 // ===FUNCTIONS===
 // updateCurrentValueString				concats numbers rather than add, ie: 5+5=55
@@ -11,12 +13,16 @@
 // periodHandler						will forward period to updateCurrentValueString if one hasn't been used
 //											in the current operand.
 // clearEntry							sets currentValueString to 0. Sets periodAllowed to true 
+// operand 								pushes currentValueString and operator to array valueChain
+//										
 //************************************************************************************
 //************************************************************************************
 //Functions tested are in this block
 //variables
 var currentValueString = "0";
 var periodAllowed = true;
+var valueChain = [];
+var operandAllowed = true;
 
 // operation functions
 function multiply(operand1,operand2)	{return operand1 * operand2};
@@ -28,6 +34,7 @@ function updateCurrentValueString(numberString){
 	if(currentValueString === "0") {currentValueString = "" + numberString}
 	else {currentValueString = "" + currentValueString + numberString;}
 	console.log(currentValueString);
+	operandAllowed = true;
 };
 
 function periodHandler(){
@@ -38,15 +45,26 @@ function clearEntry(){
 	currentValueString = "0";
 	periodAllowed = true;
 }
+
+function operand(op){
+	if(operandAllowed){
+		valueChain.push(currentValueString);
+		valueChain.push(op);
+		currentValueString = "0";
+		periodAllowed = true;
+		console.log("valueChain :" + valueChain);	
+		operandAllowed = false;
+	}			
+}
 //************************************************************************************
 //************************************************************************************
-// var currentChain = [];
-
-// function operand(op){
-	
-// }
 
 
+
+
+//found that after operand is called, when we add "0" and "." we get "." not "0."
+
+//problem with operand coming after operand
 
 //************************************************************************************
 //************************************************************************************
