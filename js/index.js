@@ -10,6 +10,7 @@
 //										updates var currentValueString, which is used to display current number
 // periodHandler						will forward period to updateCurrentValueString if one hasn't been used
 //											in the current operand.
+// clearEntry							sets currentValueString to 0. Sets periodAllowed to true 
 //************************************************************************************
 //************************************************************************************
 //Functions tested are in this block
@@ -32,19 +33,26 @@ function updateCurrentValueString(numberString){
 function periodHandler(){
 	if(periodAllowed === true){updateCurrentValueString("."); periodAllowed=false;}
 };
+
+function clearEntry(){
+	currentValueString = "0";
+	periodAllowed = true;
+}
 //************************************************************************************
 //************************************************************************************
+// var currentChain = [];
 
-// function clearEntry(){
-
+// function operand(op){
+	
 // }
+
 
 
 //************************************************************************************
 //************************************************************************************
 
 var currentElm="0";
-var currentChain = ["0"]; //[['3'],['X'],['42'],['+'],['55']];
+// var currentChain = ["0"]; //[['3'],['X'],['42'],['+'],['55']];
 
 // ****************************************************
 
