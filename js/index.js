@@ -74,6 +74,7 @@ function operand(op){
 		valueChain.push(op);
 		console.log("valueChain :" + valueChain);
 		displayCurrentVal(op)	
+		displayValueChain()
 	}			
 }
 
@@ -92,8 +93,12 @@ function isOperator(val){
 
 function evaluateChain(){
 	var evalTotal = null;
+	flushCurrentValueString();
+	valueChain.push("=");
+	displayValueChain()
 	while(valueChain.length > 0){
-		flushCurrentValueString();
+		// flushCurrentValueString();
+
 		var shifted = valueChain.shift();
 		if(evalTotal === null){evalTotal = shifted}
 		else{
@@ -121,6 +126,16 @@ function displayCurrentVal(toDisplay){   //display current number or operation i
 
 //************************************************************************************
 //************************************************************************************
+
+function displayValueChain(){  //display current chain in h4 currentChain
+  var text = "";
+  for(i=0;i<valueChain.length;i++){
+    text += valueChain[i];
+    text += " ";
+  }  
+  document.getElementById("currentChain").innerText = text;
+}
+
 
 
 displayCurrentVal(currentValueString);
@@ -223,13 +238,7 @@ var currentElm="0";
 
 
 
-// function displayCurrentChain(toDisplayChain){  //display current chain in h4 currentChain
-//   var text = "";
-//   for(i=0;i<toDisplayChain.length;i++){
-//     text += toDisplayChain[i]
-//   }  
-//   document.getElementById("currentChain").innerText = text;
-// }
+
 // // END DISPLAY ********************************************
 
 // // ********************************************************
