@@ -31,7 +31,10 @@ function minus(operand1,operand2)		{return operand1 - operand2};
 function plus(operand1,operand2)		{return operand1 + operand2};
 
 function updateCurrentValueString(numberString){
-	if(currentValueString === "0") {currentValueString = "" + numberString}
+	if(currentValueString === "0") {
+		if(numberString === "."){currentValueString = "0."}
+		else {currentValueString = "" + numberString}
+	}
 	else {currentValueString = "" + currentValueString + numberString;}
 	console.log(currentValueString);
 	operandAllowed = true;
@@ -62,9 +65,8 @@ function operand(op){
 
 
 
-//found that after operand is called, when we add "0" and "." we get "." not "0."
 
-//problem with operand coming after operand
+//found that after operand is called, when we add "0" and "." we get "." not "0." 
 
 //************************************************************************************
 //************************************************************************************
