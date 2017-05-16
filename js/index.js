@@ -1,13 +1,40 @@
+//Step one : test each individual function // document
+//************************************************************************************
+//NOTES
+
+
+//************************************************************************************
+//************************************************************************************
+//Functions tested are in this block
+
+// operation functions
+function multiply(operand1,operand2)	{return operand1 * operand2};
+function divide(operand1,operand2)		{return operand1 / operand2};
+function minus(operand1,operand2)		{return operand1 - operand2};
+function plus(operand1,operand2)		{return operand1 + operand2};
+
+
+//************************************************************************************
+//************************************************************************************
+//new functions/tests are in this block
+var currentValueString = "0";
+function updateCurrentValueString(numberString){
+	if(currentValueString === "0") {currentValueString = "" + numberString}
+	else {currentValueString = "" + currentValueString + numberString;}
+	console.log(currentValueString);
+};
+
+//Todo: update number buttons to call  currentValueString rather than update()
+function update(number){updateCurrentValueString(number)}
+
+//************************************************************************************
+//************************************************************************************
 
 var currentElm="0";
 var currentChain = ["0"]; //[['3'],['X'],['42'],['+'],['55']];
 
 // ****************************************************
-// operation functions
-function multiply(operand1,operand2){return operand1 * operand2}
-function divide(operand1,operand2){return operand1 / operand2}
-function minus(operand1,operand2){return operand1 - operand2}
-function plus(operand1,operand2){return operand1 + operand2}
+
 
 function equalsEvaluator(chain){   //when equal is pressed it then asssits in  the evaulation of the input
   //alert("This is currentChain that was passed:"+chain);  
@@ -45,6 +72,7 @@ function operate(operator){
 
 // ****************************************************
 // Main function
+/*
 function update(value){
   
   document.getElementById("currentElm").style.visibility="visible";
@@ -85,6 +113,7 @@ function update(value){
   displayCurrentElm(currentElm);
   displayCurrentChain(currentChain);
 }
+*/
 // ****************************************************
 
 
