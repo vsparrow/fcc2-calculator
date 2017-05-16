@@ -6,15 +6,23 @@
 // periodAllowed						used to prevent multiple periods in an operand
 // valueChain							array that holds values until evaluated
 // operandAllowed						used to prevent multiple operators being called in succession 
+// total 								holds total of evaluated array valueChain
 
 // ===FUNCTIONS===
 // updateCurrentValueString				concats numbers rather than add, ie: 5+5=55
 //										updates var currentValueString, which is used to display current number
 // periodHandler						will forward period to updateCurrentValueString if one hasn't been used
 //											in the current operand.
-// clearEntry							sets currentValueString to 0. Sets periodAllowed to true 
+// clearEntry							sets currentValueString to 0. Sets periodAllowed to true
+// allClear 							reset / clears everything 
 // operand 								pushes operator to array valueChain
 // flushCurrentValueString				push currentValueString to array valueChain						
+// isOperator							checks if argument is an operator (plus,-,X,/)
+//											input: string value
+//											output: bool
+
+
+// ***** update comments with input output
 //************************************************************************************
 //************************************************************************************
 //Functions tested are in this block
@@ -23,7 +31,7 @@ var currentValueString = "0";
 var periodAllowed = true;
 var valueChain = [];
 var operandAllowed = true;
-
+var total = 0;
 // operation functions
 function multiply(operand1,operand2)	{return operand1 * operand2};
 function divide(operand1,operand2)		{return operand1 / operand2};
@@ -49,6 +57,12 @@ function clearEntry(){
 	periodAllowed = true;
 }
 
+function allClear(){
+	flushCurrentValueString();	
+	valueChain = [];
+	total = 0;
+}
+
 function operand(op){
 	if(operandAllowed){
 		flushCurrentValueString();
@@ -63,56 +77,42 @@ function flushCurrentValueString(){
 		periodAllowed = true;
 		operandAllowed = false;	
 }
-//************************************************************************************
-//************************************************************************************
 
-
-var total = 0;
+function isOperator(val){
+	if( val === "plus"  || val === "-" || val === "X" || val === "/" ) 
+		{return true}
+	return false;	
+}
 
 function evaluateChain(){
-	// if( !isOperator) {}//if
 	var evalTotal = null;
 	while(valueChain.length > 0){
-
 		flushCurrentValueString();
-		// valueChain.push(currentValueString);  //see operand for duplicate code
-		// currentValueString = "0";
-		// periodAllowed = true;
-		// operandAllowed = false;
-
-
 		var shifted = valueChain.shift();
 		if(evalTotal === null){evalTotal = shifted}
 		else{
 			var operatorValue = shifted;
 			shifted = valueChain.shift();
-			// evalTotal operator shifted
-			// evalTotal operator shifted
 			console.log("evalTotal,operatorValue, shifted" + evalTotal + " " +operatorValue + " "+  shifted);
-
 			console.log("valueChain",valueChain)
 			switch(operatorValue){
 			  case "X": evalTotal=multiply(evalTotal,shifted); break;
 		      case "/": evalTotal=divide(evalTotal,shifted); break;  
 		      case "-": evalTotal=minus(evalTotal,shifted); break;  
 		      case "plus": evalTotal=plus(evalTotal,shifted); break;
-		      
             }//switch}
             console.log("evalTotal is:", evalTotal)  	
-	    }    
+	    }//e    
 	}//w
-	console.log("TOTAL: " + evalTotal)
+	var total = evalTotal
+	console.log("TOTAL: " + total)
 }//fun
 
+//************************************************************************************
+//************************************************************************************
 
-function isOperator(val){
-	// if(	   valueChain[length-1] === "+" 
-	// 	|| valueChain[length-1] === "-" 
-	// 	|| valueChain[length-1] === "X" 
-	// 	|| valueChain[length-1] === "/") 
-	if( val === "plus"  || val === "-" || val === "X" || val === "/" ) {return true}
-	return false;	
-}
+
+
 
  
 //************************************************************************************
