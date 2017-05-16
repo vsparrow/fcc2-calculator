@@ -41,6 +41,7 @@ function minus(operand1,operand2)		{return operand1 - operand2};
 function plus(operand1,operand2)		{return Number(operand1) + Number(operand2)};
 
 function updateCurrentValueString(numberString){
+	previousChainHandler();
 	if(currentValueString === "0") {
 		if(numberString === "."){currentValueString = "0."}
 		else {currentValueString = "" + numberString}
@@ -65,11 +66,14 @@ function allClear(){
 	flushCurrentValueString();	
 	valueChain = [];
 	total = 0;
+	previousChainEvaluated = false;
 	displayCurrentVal(currentValueString);
+	displayValueChain();
 }
 
 function operand(op){
 	if(operandAllowed){
+		previousChainEvaluated = false;
 		flushCurrentValueString();
 		valueChain.push(op);
 		console.log("valueChain :" + valueChain);
@@ -118,14 +122,14 @@ function evaluateChain(){
 	var total = evalTotal
 	console.log("TOTAL: " + total)
 	displayCurrentVal(total)
+	currentValueString = total;
+	previousChainEvaluated = true;
+	operandAllowed = true;
 }//fun
 
 function displayCurrentVal(toDisplay){   //display current number or operation in h2 currentElm
   document.getElementById("currentElm").innerText = toDisplay;  
 }
-
-//************************************************************************************
-//************************************************************************************
 
 function displayValueChain(){  //display current chain in h4 currentChain
   var text = "";
@@ -135,14 +139,29 @@ function displayValueChain(){  //display current chain in h4 currentChain
   }  
   document.getElementById("currentChain").innerText = text;
 }
+//************************************************************************************
+//************************************************************************************
+var previousChainEvaluated = false;   //set this to false on all clear
 
+function previousChainHandler(){
+	if(previousChainEvaluated){
+ 		//if number clicked, clear total, clear current value string
+ 		total=0;
+ 		currentValueString="0";
+ 		valueChain = [];
+ 		previousChainEvaluated = false;
+ 		//if op clicked, add currentValueString to chain //MAY not need
 
+ 		// previousChainEvaluated = false either way
+	}
+}
 
 displayCurrentVal(currentValueString);
 
 
-
+//all cealr should display empty value chain
  //if last entry was operand do not evaluate chain
+ //if chain evaluaated , continue being able to add on more values and operands
 //************************************************************************************
 //************************************************************************************
 
