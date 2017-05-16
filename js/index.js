@@ -20,8 +20,10 @@
 // isOperator							checks if argument is an operator (plus,-,X,/)
 //											input: string value
 //											output: bool
-
-
+// evaluateChain 						evaulate all values in valueChain and currentValueString
+//											sets var total to total of evaluations
+// displayCurrentVal					displays value of currentValueString or operand called
+//											displays total on call of evaluateChain
 // ***** update comments with input output
 //************************************************************************************
 //************************************************************************************
@@ -46,6 +48,7 @@ function updateCurrentValueString(numberString){
 	else {currentValueString = "" + currentValueString + numberString;}
 	console.log(currentValueString);
 	operandAllowed = true;
+	displayCurrentVal(currentValueString)
 };
 
 function periodHandler(){
@@ -55,19 +58,22 @@ function periodHandler(){
 function clearEntry(){
 	currentValueString = "0";
 	periodAllowed = true;
+	displayCurrentVal(currentValueString);
 }
 
 function allClear(){
 	flushCurrentValueString();	
 	valueChain = [];
 	total = 0;
+	displayCurrentVal(currentValueString);
 }
 
 function operand(op){
 	if(operandAllowed){
 		flushCurrentValueString();
 		valueChain.push(op);
-		console.log("valueChain :" + valueChain);	
+		console.log("valueChain :" + valueChain);
+		displayCurrentVal(op)	
 	}			
 }
 
@@ -106,15 +112,22 @@ function evaluateChain(){
 	}//w
 	var total = evalTotal
 	console.log("TOTAL: " + total)
+	displayCurrentVal(total)
 }//fun
 
+function displayCurrentVal(toDisplay){   //display current number or operation in h2 currentElm
+  document.getElementById("currentElm").innerText = toDisplay;  
+}
+
 //************************************************************************************
 //************************************************************************************
 
 
+displayCurrentVal(currentValueString);
 
 
- 
+
+ //if last entry was operand do not evaluate chain
 //************************************************************************************
 //************************************************************************************
 
@@ -207,9 +220,8 @@ var currentElm="0";
 
 // // *****************************************************
 // // DISPLAY FUNCTIONS
-// function displayCurrentElm(toDisplay){   //display current number or operation in h2 currentElm
-//   document.getElementById("currentElm").innerText = toDisplay;  
-// }
+
+
 
 // function displayCurrentChain(toDisplayChain){  //display current chain in h4 currentChain
 //   var text = "";
