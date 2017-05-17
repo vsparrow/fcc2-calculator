@@ -106,7 +106,7 @@ function isOperator(val){
 }
 
 function evaluateChain(){
-	console.log("currentValueString", currentValueString);
+	// console.log("currentValueString", currentValueString);
 	var evalTotal = null;
 	flushCurrentValueString();
 	valueChain.push("=");
@@ -119,19 +119,19 @@ function evaluateChain(){
 		else{
 			var operatorValue = shifted;
 			shifted = valueChain.shift();
-			console.log("evalTotal,operatorValue, shifted" + evalTotal + " " +operatorValue + " "+  shifted);
-			console.log("valueChain",valueChain)
+			// console.log("evalTotal,operatorValue, shifted" + evalTotal + " " +operatorValue + " "+  shifted);
+			// console.log("valueChain",valueChain)
 			switch(operatorValue){
 			  case "X": evalTotal=multiply(evalTotal,shifted); break;
 		      case "/": evalTotal=divide(evalTotal,shifted); break;  
 		      case "-": evalTotal=minus(evalTotal,shifted); break;  
 		      case "plus": evalTotal=plus(evalTotal,shifted); break;
             }//switch}
-            console.log("evalTotal is:", evalTotal)  	
+            // console.log("evalTotal is:", evalTotal)  	
 	    }//e    
 	}//w
 	var total = evalTotal
-	console.log("TOTAL: " + total)
+	// console.log("TOTAL: " + total)
 	displayCurrentVal(total)
 	currentValueString = total;
 	previousChainEvaluated = true;
