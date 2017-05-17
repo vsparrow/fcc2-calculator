@@ -7,7 +7,8 @@
 // valueChain							array that holds values until evaluated
 // operandAllowed						used to prevent multiple operators being called in succession 
 // total 								holds total of evaluated array valueChain
-
+// previousChainEvaluated				bool, tells if there was a chain evaluated previously
+//											useful for keeping evaluation available to future inputs
 // ===FUNCTIONS===
 // updateCurrentValueString				concats numbers rather than add, ie: 5+5=55
 //										updates var currentValueString, which is used to display current number
@@ -24,6 +25,9 @@
 //											sets var total to total of evaluations
 // displayCurrentVal					displays value of currentValueString or operand called
 //											displays total on call of evaluateChain
+// previousChainHandler					used to handle keeping previous chain available.
+//											clean up chain 
+
 // ***** update comments with input output
 //************************************************************************************
 //************************************************************************************
@@ -34,6 +38,7 @@ var periodAllowed = true;
 var valueChain = [];
 var operandAllowed = true;
 var total = 0;
+var previousChainEvaluated = false;   //set this to false on all clear
 // operation functions
 function multiply(operand1,operand2)	{return operand1 * operand2};
 function divide(operand1,operand2)		{return operand1 / operand2};
@@ -42,14 +47,16 @@ function plus(operand1,operand2)		{return Number(operand1) + Number(operand2)};
 
 function updateCurrentValueString(numberString){
 	previousChainHandler();
-	if(currentValueString === "0") {
-		if(numberString === "."){currentValueString = "0."}
-		else {currentValueString = "" + numberString}
+	if(inputLengthAllowed()){
+		if(currentValueString === "0") {
+			if(numberString === "."){currentValueString = "0."}
+			else {currentValueString = "" + numberString}
+		}
+		else {currentValueString = "" + currentValueString + numberString;}
+		console.log(currentValueString); console.log("inputLengthAllowed", inputLengthAllowed());
+		operandAllowed = true;
+		displayCurrentVal(currentValueString)
 	}
-	else {currentValueString = "" + currentValueString + numberString;}
-	console.log(currentValueString);
-	operandAllowed = true;
-	displayCurrentVal(currentValueString)
 };
 
 function periodHandler(){
@@ -57,9 +64,12 @@ function periodHandler(){
 };
 
 function clearEntry(){
-	currentValueString = "0";
-	periodAllowed = true;
-	displayCurrentVal(currentValueString);
+	if(previousChainEvaluated){allClear()}
+	else {
+		currentValueString = "0";
+		periodAllowed = true;
+		displayCurrentVal(currentValueString);	
+	}
 }
 
 function allClear(){
@@ -139,27 +149,31 @@ function displayValueChain(){  //display current chain in h4 currentChain
   }  
   document.getElementById("currentChain").innerText = text;
 }
-//************************************************************************************
-//************************************************************************************
-var previousChainEvaluated = false;   //set this to false on all clear
+
 
 function previousChainHandler(){
 	if(previousChainEvaluated){
- 		//if number clicked, clear total, clear current value string
  		total=0;
  		currentValueString="0";
  		valueChain = [];
  		previousChainEvaluated = false;
- 		//if op clicked, add currentValueString to chain //MAY not need
-
- 		// previousChainEvaluated = false either way
+ 		displayValueChain()
 	}
 }
+//88888888888if val empty   how to "block diplay"
+//************************************************************************************
+//************************************************************************************
+function inputLengthAllowed(){
+	// dont allow digit length to be greater than 8
+	if(currentValueString.length<=8){return true}
+	else return false;	
+}
+
 
 displayCurrentVal(currentValueString);
 
-
-//all cealr should display empty value chain
+// limit input size
+ //if previousChainEvaluated and Clear hit, call allclear
  //if last entry was operand do not evaluate chain
  //if chain evaluaated , continue being able to add on more values and operands
 //************************************************************************************
